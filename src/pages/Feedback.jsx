@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../assets/css/feedbackform.css';
 
 function Feedback() {
@@ -7,14 +8,41 @@ function Feedback() {
   const [rating, setRating] = useState('');
   const [options, setOptions] = useState([]);
   const [feedbackText, setFeedbackText] = useState('');
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
-  const validateFf = (e) => {
+  useEffect(() => {
+    if (!token) {
+      navigate('/signup');
+    }
+  }, [token, navigate]);
+
+
+  const validateFf = async (e) => {
     e.preventDefault();
     if (!rating && options.length === 0) {
       setErrorMsg("Kindly input atleast one field");
-    } else {
-      setErrorMsg('');
-      setSuccess(true);
+      return;
+    }
+
+    setErrorMsg('');
+    try {
+      const res = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ rating, options, feedbackText }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setSuccess(true);
+      } else {
+        setErrorMsg(data.message || 'Failed to submit feedback');
+      }
+    } catch (err) {
+      setErrorMsg('Server error. Please try again later.');
     }
   };
 

@@ -1,8 +1,14 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 function Navbar() {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
+  const navigate = useNavigate();
+  // useLocation causes a re-render on every navigation, ensuring we re-read localStorage
+  useLocation();
+
+  const token = localStorage.getItem('token');
+  const isLoggedIn = !!token;
 
   let userRole = null;
   const userStr = localStorage.getItem('user');
@@ -14,6 +20,13 @@ function Navbar() {
 
   const showSidebar = () => setIsSidebarActive(true);
   const hideSidebar = () => setIsSidebarActive(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    hideSidebar();
+    navigate('/');
+  };
 
   return (
     <nav>
@@ -38,7 +51,11 @@ function Navbar() {
             <li className="hmnb"><Link to="/faq">Faq/Help</Link></li>
           </ul>
           <div className="rin">
-            <Link className="rinb" to="/signup"><button id="bnn">SignUp</button></Link>
+            {isLoggedIn ? (
+              <button id="bnn" onClick={handleLogout}>LogOut</button>
+            ) : (
+              <Link className="rinb" to="/signup"><button id="bnn">SignUp</button></Link>
+            )}
             <img id="uin" src="/images/user_icon-removebg-preview.png" alt="User icon" />
           </div>
         </div>
@@ -61,7 +78,11 @@ function Navbar() {
             <li><Link to="/admin" onClick={hideSidebar}>Admin Panel</Link></li>
           )}
           <li><Link to="/faq" onClick={hideSidebar}>Faq/Help</Link></li>
-          <li><Link to="#" onClick={hideSidebar}>Log Out</Link></li>
+          {isLoggedIn ? (
+            <li><Link to="#" onClick={handleLogout}>Log Out</Link></li>
+          ) : (
+            <li><Link to="/signup" onClick={hideSidebar}>Sign Up</Link></li>
+          )}
         </ul>
       </div>  
     </nav>

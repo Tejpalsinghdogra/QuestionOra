@@ -8,6 +8,7 @@ import authRoutes from './routes/auth.js';
 import paperRoutes from './routes/papers.js';
 import adminRoutes from './routes/admin.js';
 import reportRoutes from './routes/reports.js';
+import feedbackRoutes from './routes/feedback.js';
 
 // Load environment variables
 dotenv.config();
@@ -29,6 +30,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/papers', paperRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/reports', reportRoutes);
+app.use('/api/feedback', feedbackRoutes);
 
 // Base route for health check
 app.get('/', (req, res) => {
