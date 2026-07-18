@@ -1,0 +1,198 @@
+/* CoursePage.css */
+
+.containerm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8px;
+    height: auto;
+}
+
+#qoh {
+    color: #002B5B;
+    font-size: 20px;
+    font-weight: 600;
+    display: inline;
+    text-align: center;
+}
+
+#qocd {
+    width: 700px;
+    text-align: center;
+    background-color: #64B5F6;
+    color: #002B5B;
+    border-radius: 40px;
+    padding: 1px 10px 1px 10px;
+    position: relative;
+    top: -7px;
+    border: 2px solid #64B5F6;
+    box-shadow: 1px 1px 10px #002B5B;
+    margin-top: 10px;
+}
+
+.containerS {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.tophead {
+    font-size: 20px;
+    font-weight: 550;
+    color: #002B5B;
+}
+
+.Filters {
+    font-weight: 400;
+    color: #002B5B;
+    font-size: 15px;
+    position: relative;
+    left: 5px;
+}
+
+.Alloptions {
+    border: 1px solid #64B5F6;
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    background-color: #64B5F6;
+    color: #002B5B;
+    font-weight: 500;
+    box-shadow: 1px 1px 5px #002B5B;
+    margin-left: 13px;
+}
+
+.Alloptions:hover {
+    border: 1px solid #002B5B;
+    transition: all 0.5s ease-in-out;
+}
+
+.containerTb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.tableM {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #002B5B;
+    border-radius: 20px;
+    width: 500px;
+    box-shadow: 1px 1px 5px #002B5B;
+}
+
+.tableME {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #002B5B;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    column-gap: 114px;
+    height: 40px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.tableE {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #002B5B;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    column-gap: 110px;
+    height: 40px;
+}
+
+.containerL {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.lnote {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: #002B5B;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.mhed {
+    position: relative;
+    left: 10px;
+    color: #002B5B;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.tinfo {
+    color: #002B5B;
+    display: flex;
+    flex-direction: row;
+    column-gap: 17px;
+}
+
+.lineend {
+    list-style-type: none;
+}
+
+@media(max-width:691px) {
+    #qocd {
+        width: 270px;
+    }
+
+    .tableM {
+        overflow: scroll;
+        width: 320px;
+        height: fit-content;
+    }
+
+    .tableME {
+        column-gap: 33px;
+    }
+
+    .tableE {
+        column-gap: 30px;
+    }
+
+    .containerS {
+        margin-left: 20px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .lnote {
+        width: 310px;
+    }
+
+    .Filters {
+        position: relative;
+        right: 5px;
+        left: 0px;
+        padding-right: 9px;
+    }
+
+    .Alloptions {
+        margin-right: 5px;
+        margin-left: 0px;
+    }
+
+    .tophead {
+        margin-right: 5px;
+    }
+}
