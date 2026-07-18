@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../assets/css/signup.css';
 
 function Login() {
@@ -67,6 +67,9 @@ function Login() {
             </div>
             <div className="eicsus">
               <button type="submit" id="sub">Login</button>
+            </div>
+            <div className="form-footer">
+              Don't have an account? <Link to="/signup">Sign up</Link>
             </div>
           </form>
         </div>

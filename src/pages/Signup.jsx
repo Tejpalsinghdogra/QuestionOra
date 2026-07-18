@@ -78,10 +78,8 @@ function Signup() {
             <div className="eicsus">
               <button type="submit" id="sub">SignUp</button>
             </div>
-            <div className="eicsus" style={{ marginTop: '15px', textAlign: 'center' }}>
-              <span className="ses" style={{ fontSize: '14px', color: 'grey' }}>
-                Already have an account? <Link to="/login" style={{ color: '#57c7c3', textDecoration: 'none', fontWeight: 'bold' }}>Log in</Link>
-              </span>
+            <div className="form-footer">
+              Already have an account? <Link to="/login">Log in</Link>
             </div>
           </form>
         </div>
