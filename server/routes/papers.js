@@ -309,8 +309,8 @@ router.get('/', async (req, res) => {
 
 // @route   GET /api/papers/:id/download
 // @desc    Track download and return file URL
-// @access  Public
-router.get('/:id/download', async (req, res) => {
+// @access  Private (Registered users only)
+router.get('/:id/download', authMiddleware, async (req, res) => {
   try {
     const result = await findPaperById(req.params.id);
     if (!result) {

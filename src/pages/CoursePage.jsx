@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../assets/css/CoursePage.css';
 
 const courseDataMapping = {
@@ -79,6 +79,7 @@ const courseDataMapping = {
 
 function CoursePage() {
   const { courseId } = useParams();
+  const navigate = useNavigate();
   const course = courseDataMapping[courseId?.toLowerCase()];
 
   const [selectedSem, setSelectedSem] = useState('Sem-All');
@@ -118,8 +119,16 @@ function CoursePage() {
   }
 
   const handleDownload = async (paperId) => {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    if (!token) {
+      navigate('/signup');
+      return;
+    }
+
     try {
-      const res = await fetch(`/api/papers/${paperId}/download`);
+      const res = await fetch(`/api/papers/${paperId}/download`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
       const data = await res.json();
       if (res.ok && data.fileUrl) {
         window.open(data.fileUrl, '_blank');
