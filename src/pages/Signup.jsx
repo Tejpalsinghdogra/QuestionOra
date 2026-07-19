@@ -81,11 +81,13 @@ function Signup() {
             </div>
             <div className="eicsus">
               <input type="checkbox" id="fcc" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
-              <span className="ses">I agree to all the terms of use and privacy policies</span>
+              <label htmlFor="fcc" className="ses" style={{ cursor: 'pointer' }}>
+                I agree to all the <Link to="/tou" style={{ textDecoration: 'underline', color: 'inherit' }} onClick={(e) => e.stopPropagation()}>terms of use</Link> and <Link to="/pp" style={{ textDecoration: 'underline', color: 'inherit' }} onClick={(e) => e.stopPropagation()}>privacy policies</Link>
+              </label>
             </div>
             <div className="eicsus">
               <input type="checkbox" id="ftc" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
-              <span className="ses">Remember me</span>
+              <label htmlFor="ftc" className="ses" style={{ cursor: 'pointer' }}>Remember me</label>
             </div>
             <div className="eicsus">
               <button type="submit" id="sub">SignUp</button>
