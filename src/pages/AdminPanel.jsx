@@ -238,7 +238,7 @@ function AdminPanel() {
               <form onSubmit={handleAppoint}>
                 <div className="form-group">
                   <label>User's Email Address</label>
-                  <input type="email" required value={appointEmail} onChange={e => setAppointEmail(e.target.value)} placeholder="Enter registered email..." />
+                  <input type="email" required value={appointEmail} onChange={e => setAppointEmail(e.target.value)}/>
                 </div>
                 <button type="submit" className="btn-primary">Appoint as Teacher</button>
               </form>

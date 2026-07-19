@@ -6,8 +6,8 @@ function Signup() {
   const [infoMsg, setInfoMsg] = useState('');
   const [focused, setFocused] = useState({ name: false, email: false, password: false, confirm: false });
   const [values, setValues] = useState({ name: '', email: '', password: '', confirm: '' });
-  const [agreed, setAgreed] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [agreed, setAgreed] = useState(true);
+  const [rememberMe, setRememberMe] = useState(true);
 
   const navigate = useNavigate();
 
