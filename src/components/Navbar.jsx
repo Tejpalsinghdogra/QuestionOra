@@ -7,11 +7,11 @@ function Navbar() {
   // useLocation causes a re-render on every navigation, ensuring we re-read localStorage
   useLocation();
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   const isLoggedIn = !!token;
 
   let userRole = null;
-  const userStr = localStorage.getItem('user');
+  const userStr = localStorage.getItem('user') || sessionStorage.getItem('user');
   if (userStr) {
     try {
       userRole = JSON.parse(userStr).role;
@@ -24,6 +24,8 @@ function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
     hideSidebar();
     navigate('/');
   };
@@ -42,7 +44,7 @@ function Navbar() {
               />
             </li>
             <li className="hmnb"><Link to="/">Home</Link></li>
-            {userRole === 'teacher' || userRole === 'admin' ? (
+            {userRole === 'teacher' ? (
               <li className="hmnb"><Link to="/teacher">Upload Paper</Link></li>
             ) : null}
             {userRole === 'admin' && (
@@ -71,7 +73,7 @@ function Navbar() {
             />
           </li>
           <li><Link to="/" onClick={hideSidebar}>Home</Link></li>
-          {userRole === 'teacher' || userRole === 'admin' ? (
+          {userRole === 'teacher' ? (
             <li><Link to="/teacher" onClick={hideSidebar}>Upload Paper</Link></li>
           ) : null}
           {userRole === 'admin' && (

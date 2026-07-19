@@ -28,13 +28,9 @@ function TeacherPanel() {
   // Delete confirm modal
   const [deleteModal, setDeleteModal] = useState(null);
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/login');
-  };
+
 
   const fetchMyPapers = async () => {
     setLoading(true);
@@ -196,9 +192,6 @@ function TeacherPanel() {
       <div className="panel-header">
         <h1>Teacher Panel</h1>
         <p>Manage your question paper uploads</p>
-        <div className="panel-header-actions">
-          <button className="btn-logout" onClick={logout}>Logout</button>
-        </div>
       </div>
 
       <div className="panel-tabs">

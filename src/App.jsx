@@ -30,7 +30,7 @@ function App() {
           <Route path="block-a" element={<BlockA />} />
           <Route path="block-b" element={<BlockB />} />
           <Route path="block-c" element={<BlockC />} />
-          
+
           <Route path="course/:courseId" element={<CoursePage />} />
 
           <Route path="faq" element={<FAQ />} />

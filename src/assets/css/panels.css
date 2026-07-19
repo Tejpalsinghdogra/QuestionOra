@@ -3,7 +3,7 @@
 /* ===== PANEL BASE ===== */
 .panel-wrapper {
   font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
+  min-height: 400px;
   padding: 0 20px 40px;
 }
 
@@ -239,6 +239,7 @@
   font-size: 12px;
   font-weight: 500;
   margin-bottom: 6px;
+  text-align: center;
 }
 
 .form-group input,
@@ -254,6 +255,8 @@
   box-shadow: 0 2px 8px rgba(100, 181, 246, 0.3);
   box-sizing: border-box;
   outline: none;
+  text-align: center;
+  text-align-last: center;
 }
 
 .form-group input[type="file"] {

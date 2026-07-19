@@ -6,6 +6,8 @@ function Signup() {
   const [infoMsg, setInfoMsg] = useState('');
   const [focused, setFocused] = useState({ name: false, email: false, password: false, confirm: false });
   const [values, setValues] = useState({ name: '', email: '', password: '', confirm: '' });
+  const [agreed, setAgreed] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const navigate = useNavigate();
 
@@ -20,6 +22,11 @@ function Signup() {
       return;
     }
 
+    if (!agreed) {
+      setInfoMsg("You must agree to the terms of use and privacy policies");
+      return;
+    }
+
     try {
       const response = await fetch('/api/auth/signup', {
         method: 'POST',
@@ -29,8 +36,13 @@ function Signup() {
       const data = await response.json();
       if (response.ok) {
         setInfoMsg("Signed up successfully! Redirecting to home...");
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data));
+        if (rememberMe) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data));
+        } else {
+          sessionStorage.setItem('token', data.token);
+          sessionStorage.setItem('user', JSON.stringify(data));
+        }
         setTimeout(() => navigate('/'), 1500);
       } else {
         setInfoMsg(data.message || "Signup failed");
@@ -68,11 +80,11 @@ function Signup() {
               <input className="tbs" id="cptb" type="password" onFocus={() => handleFocus('confirm')} onBlur={() => handleBlur('confirm')} onChange={(e) => handleChange('confirm', e)} value={values.confirm} />
             </div>
             <div className="eicsus">
-              <input type="checkbox" id="fcc" />
+              <input type="checkbox" id="fcc" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
               <span className="ses">I agree to all the terms of use and privacy policies</span>
             </div>
             <div className="eicsus">
-              <input type="checkbox" id="ftc" />
+              <input type="checkbox" id="ftc" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
               <span className="ses">Remember me</span>
             </div>
             <div className="eicsus">

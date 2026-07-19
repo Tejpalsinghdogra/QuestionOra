@@ -9,7 +9,7 @@ function Feedback() {
   const [options, setOptions] = useState([]);
   const [feedbackText, setFeedbackText] = useState('');
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
   useEffect(() => {
     if (!token) {

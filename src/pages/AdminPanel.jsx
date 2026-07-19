@@ -6,7 +6,7 @@ function AdminPanel() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [infoMsg, setInfoMsg] = useState('');
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
   // Data states
   const [stats, setStats] = useState(null);
@@ -26,11 +26,7 @@ function AdminPanel() {
   // Delete modal
   const [deleteModal, setDeleteModal] = useState(null);
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/login');
-  };
+
 
   const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' };
 
@@ -160,9 +156,6 @@ function AdminPanel() {
       <div className="panel-header">
         <h1>Admin Panel</h1>
         <p>Manage teachers, papers, and platform activity</p>
-        <div className="panel-header-actions">
-          <button className="btn-logout" onClick={logout}>Logout</button>
-        </div>
       </div>
 
       <div className="panel-tabs">
