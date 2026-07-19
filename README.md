@@ -42,6 +42,13 @@ Tracks flagged or problematic question papers reported by users.
 - `reason` (String, required)
 - `status` (String, enum: `['pending', 'resolved']`, default: `'pending'`)
 
+### 4. Feedback Model (server/models/Feedback.js)
+Stores user feedback responses and quality ratings.
+- `rating` (Number, min: `1`, max: `5`)
+- `options` (Array of Strings - e.g., "Slow loading", "Bad navigation")
+- `feedbackText` (String)
+- `submittedBy` (ObjectId ref User, required - links submissions to registered accounts)
+
 ---
 
 ## Portals & Roles
@@ -86,13 +93,13 @@ Below is the implementation progress map across the codebase:
 - [ ] **Flag/Report Button UI:**
   - Backend route (`/api/reports`) and Admin UI exist.
   - No frontend button exists on the public Course page for users to submit a report.
-- [ ] **Feedback Persistence:**
-  - Feedback page ([Feedback.jsx](file:///Users/tejpalsingh01/Desktop/Projects/QuestionOra%20React/src/pages/Feedback.jsx)) is a client-only mock. Must construct Mongoose schema and database submission routes.
-- [ ] **Navbar User State:**
-  - Login/SignUp buttons always show up in [Navbar.jsx](file:///Users/tejpalsingh01/Desktop/Projects/QuestionOra%20React/src/components/Navbar.jsx) regardless of authentication.
-  - Sidebar logout link is currently a dummy `#` placeholder.
-- [ ] **Download Protection Alignment:**
-  - FAQ indicates downloading is restricted to registered users, but the API and frontend currently allow fully public anonymous downloads.
+- [x] **Feedback Persistence:**
+  - Feedback page ([Feedback.jsx](file:///Users/tejpalsingh01/Desktop/Projects/QuestionOra%20React/src/pages/Feedback.jsx)) is fully linked to backend schema and database route.
+- [x] **Navbar User State:**
+  - Conditional authentication display in [Navbar.jsx](file:///Users/tejpalsingh01/Desktop/Projects/QuestionOra%20React/src/components/Navbar.jsx) checks for login token and changes options accordingly.
+  - Sidebar logout link fully clears storage scopes.
+- [x] **Download Protection Alignment:**
+  - Standardized downloading protection to check session token on front-end (redirects to `/signup`) and backend `authMiddleware` on API download endpoint.
 
 ---
 
