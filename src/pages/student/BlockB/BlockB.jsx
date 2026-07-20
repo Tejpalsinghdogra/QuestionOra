@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../assets/css/blockb.css';
+import './blockb.css';
 
 function BlockB() {
   return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../assets/css/panels.css';
+import '../../admin/AdminPanel/panels.css';
 
 function TeacherPanel() {
   const [activeTab, setActiveTab] = useState('upload');

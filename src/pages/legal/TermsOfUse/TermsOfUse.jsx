@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/css/tou.css';
+import './tou.css';
 
 function TermsOfUse() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/css/csp.css';
+import './csp.css';
 
 function ContentSharingPolicy() {
   return (

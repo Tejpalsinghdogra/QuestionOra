@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../assets/css/panels.css';
+import './panels.css';
 
 function AdminPanel() {
   const [activeTab, setActiveTab] = useState('dashboard');

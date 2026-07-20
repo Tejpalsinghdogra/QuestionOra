@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../assets/css/blockc.css';
+import './blockc.css';
 
 function BlockC() {
   return (

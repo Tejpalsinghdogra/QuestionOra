@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import '../assets/css/CoursePage.css';
+import './CoursePage.css';
 
 const courseDataMapping = {
   bca: {

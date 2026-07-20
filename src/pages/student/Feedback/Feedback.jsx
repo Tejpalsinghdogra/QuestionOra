@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../assets/css/feedbackform.css';
+import './feedbackform.css';
 
 function Feedback() {
   const [errorMsg, setErrorMsg] = useState('');

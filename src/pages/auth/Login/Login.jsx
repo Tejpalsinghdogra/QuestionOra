@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import '../assets/css/signup.css';
+import '../Signup/signup.css';
 
 function Login() {
   const [infoMsg, setInfoMsg] = useState('');
