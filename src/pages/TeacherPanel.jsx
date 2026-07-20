@@ -20,13 +20,16 @@ function TeacherPanel() {
   // Edit modal state
   const [editModal, setEditModal] = useState(null);
   const [editForm, setEditForm] = useState({});
+  const [isSaving, setIsSaving] = useState(false);
 
   // Replace file modal state
   const [replaceModal, setReplaceModal] = useState(null);
   const [replaceFile, setReplaceFile] = useState(null);
+  const [isReplacing, setIsReplacing] = useState(false);
 
   // Delete confirm modal
   const [deleteModal, setDeleteModal] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
@@ -111,6 +114,7 @@ function TeacherPanel() {
   };
 
   const handleEdit = async () => {
+    setIsSaving(true);
     try {
       const res = await fetch(`/api/papers/${editModal}`, {
         method: 'PUT',
@@ -128,12 +132,15 @@ function TeacherPanel() {
     } catch (err) {
       console.error(err);
       setInfoMsg('Server error editing paper');
+    } finally {
+      setIsSaving(false);
     }
   };
 
   // ===== REPLACE FILE =====
   const handleReplace = async () => {
     if (!replaceFile) { setInfoMsg('Please select a file'); return; }
+    setIsReplacing(true);
     const formData = new FormData();
     formData.append('file', replaceFile);
 
@@ -155,11 +162,14 @@ function TeacherPanel() {
     } catch (err) {
       console.error(err);
       setInfoMsg('Server error replacing file');
+    } finally {
+      setIsReplacing(false);
     }
   };
 
   // ===== DELETE =====
   const handleDelete = async () => {
+    setIsDeleting(true);
     try {
       const res = await fetch(`/api/papers/${deleteModal}`, {
         method: 'DELETE',
@@ -176,6 +186,8 @@ function TeacherPanel() {
     } catch (err) {
       console.error(err);
       setInfoMsg('Server error deleting paper');
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -386,7 +398,7 @@ function TeacherPanel() {
             </div>
             <div className="modal-actions">
               <button className="btn-cancel" onClick={() => setEditModal(null)}>Cancel</button>
-              <button className="btn-confirm" onClick={handleEdit}>Save Changes</button>
+              <button className="btn-confirm" onClick={handleEdit} disabled={isSaving}>{isSaving ? 'Saving...' : 'Save Changes'}</button>
             </div>
           </div>
         </div>
@@ -406,7 +418,7 @@ function TeacherPanel() {
             </div>
             <div className="modal-actions">
               <button className="btn-cancel" onClick={() => setReplaceModal(null)}>Cancel</button>
-              <button className="btn-confirm" onClick={handleReplace}>Replace File</button>
+              <button className="btn-confirm" onClick={handleReplace} disabled={isReplacing}>{isReplacing ? 'Replacing...' : 'Replace File'}</button>
             </div>
           </div>
         </div>
@@ -422,7 +434,7 @@ function TeacherPanel() {
             </p>
             <div className="modal-actions">
               <button className="btn-cancel" onClick={() => setDeleteModal(null)}>Cancel</button>
-              <button className="btn-danger" onClick={handleDelete}>Delete</button>
+              <button className="btn-danger" onClick={handleDelete} disabled={isDeleting}>{isDeleting ? 'Deleting...' : 'Delete'}</button>
             </div>
           </div>
         </div>

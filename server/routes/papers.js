@@ -175,11 +175,6 @@ router.put('/:id', authMiddleware, checkRole('teacher', 'admin'), async (req, re
     paper.semester = semester || paper.semester;
     paper.year = year || paper.year;
     paper.type = type || paper.type;
-    paper.lastModifiedBy = req.user._id;
-    paper.modificationHistory.push({
-      modifiedBy: req.user._id,
-      changes: changes.join(', ')
-    });
 
     if (newBlock !== block) {
       // Document is changing collections/blocks
@@ -223,11 +218,6 @@ router.put('/:id/replace-file', authMiddleware, checkRole('teacher', 'admin'), u
     
     // Update paper with new file
     paper.fileUrl = req.file.path;
-    paper.lastModifiedBy = req.user._id;
-    paper.modificationHistory.push({
-      modifiedBy: req.user._id,
-      changes: 'File replaced'
-    });
 
     await paper.save();
     
@@ -320,10 +310,11 @@ router.get('/:id/download', authMiddleware, async (req, res) => {
     
     paper.downloads = (paper.downloads || 0) + 1;
     await paper.save();
-    // Force download by injecting fl_attachment into the Cloudinary URL
+    // Force download by injecting fl_attachment:<safeTitle> into the Cloudinary URL
     let downloadUrl = paper.fileUrl;
     if (downloadUrl.includes('/upload/')) {
-      downloadUrl = downloadUrl.replace('/upload/', '/upload/fl_attachment/');
+      const safeTitle = (paper.title || 'paper').replace(/[^a-zA-Z0-9]/g, '_');
+      downloadUrl = downloadUrl.replace('/upload/', `/upload/fl_attachment:${safeTitle}/`);
     }
     
     res.json({ fileUrl: downloadUrl });
