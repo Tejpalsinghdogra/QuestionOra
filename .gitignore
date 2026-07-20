@@ -3,8 +3,7 @@ node_modules/
 server/node_modules/
 
 # Production build
-dist/*
-!dist/images/
+dist/
 dist-ssr/
 *.local
 
